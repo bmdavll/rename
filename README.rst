@@ -54,13 +54,16 @@ Options
                         FORMAT substitution. Each may be a Python regular
                         expression substitution (e.g. 's/^foo(\w{3})/boo\1/g')
                         or a Perl-style transliteration (e.g. 'y/A-Z/a-z/').
-                        Available flags for s/// are "a" (see re.ASCII), "i"
-                        (case-insensitive pattern), "g" (replace all), and N >
-                        0 (replace up to N occurrences); available flags for
-                        y/// are the same as in Perl: "c" (complement the
-                        search list), "d" (delete characters in the search
-                        list not found in the replacement list), and "s"
-                        (squash runs of replaced characters).
+                        Available flags for s///:
+                            a       make \w, \b, \d, \s, etc. perform ASCII-
+                                    only matching
+                            i       case-insensitive pattern
+                            g       replace all occurrences
+                            N > 0   replace up to N occurrences
+                        Available flags for y///: (same as in Perl)
+                            c       complement the search list
+                            d       delete found but unreplaced characters
+                            s       squash duplicate replaced characters
                         N.B. unless the -w option is given, tranformations are
                         only performed on the part of the name before the
                         extension, if any.
