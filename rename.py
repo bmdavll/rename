@@ -384,11 +384,15 @@ def generateRenames(args):
 
     for i, arg in enumerate(pargs):
         if not arg:
-            try:
-                os.rename(args[i], '')
-            except OSError as e:
-                PrintError(args[i], e.strerror)
-                updateStatus(1)
+            PrintError(args[i], "Cannot rename")
+            updateStatus(1)
+            continue
+
+        try:
+            os.stat(args[i])
+        except OSError as e:
+            PrintError(args[i], e.strerror)
+            updateStatus(1)
             continue
 
         abspath = path.abspath(arg)
