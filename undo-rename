@@ -1,0 +1,21 @@
+#!/bin/bash
+# Reads from stdin formatted output obtained from a running of
+#   rename.py -v
+#       or
+#   renumb.py -v
+# and tries to undo the operations by moving the renamed files back.
+
+IFS=$'\n'
+
+declare -i code=0
+
+while read
+do
+	if [[ "$REPLY" =~ ^(.*):$'\t'(.*)$ ]]; then
+		echo mv -i "\"${BASH_REMATCH[2]}\"" "\"${BASH_REMATCH[1]}\""
+		mv -i "${BASH_REMATCH[2]}" "${BASH_REMATCH[1]}"
+		[ $? -ne 0 ] && code+=1
+	fi
+done
+
+exit $code

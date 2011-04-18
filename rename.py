@@ -341,12 +341,12 @@ class Rename:
     def print(self):
         if self.renamed:
             if _verbose:
-                print(self.arg, self.new_name, sep=': ')
+                print(self.arg, self.new_name, sep=':\t')
         elif _noact:
             try:
                 os.stat(self.arg)
                 if self.path != self.new_path:
-                    print(self.arg, self.new_name, sep=': ')
+                    print(self.arg, self.new_name, sep=':\t')
             except OSError as e:
                 PrintError(self.arg, e.strerror)
                 updateStatus(1)
